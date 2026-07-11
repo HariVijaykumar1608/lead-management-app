@@ -85,12 +85,14 @@ const createLead = async (req, res) => {
         ]);
 
         res.status(201).json({
+            success: true,
             message: "Lead created successfully",
             id: result.insertId
         });
 
     } catch (error) {
         res.status(500).json({
+            success: false,
             message: error.message
         });
     }
@@ -109,6 +111,7 @@ const updateLead = async (req, res) => {
 
         if (rows.length === 0) {
             return res.status(404).json({
+                success: false,
                 message: "Lead not found"
             });
         }
@@ -151,12 +154,14 @@ const updateLead = async (req, res) => {
         ]);
 
         res.status(200).json({
+            success: true,
             message: "Lead updated successfully",
             data: updatedLead
         });
 
     } catch (error) {
         res.status(500).json({
+            success: false,
             message: error.message
         });
     }
@@ -177,16 +182,19 @@ const deleteLead = async (req, res) => {
 
         if (result.affectedRows === 0) {
             return res.status(404).json({
+                success: false,
                 message: "Lead not found"
             });
         }
 
         res.status(200).json({
+            success: true,
             message: "Lead deleted successfully"
         });
 
     } catch (error) {
         res.status(500).json({
+            success: false,
             message: error.message
         });
     }

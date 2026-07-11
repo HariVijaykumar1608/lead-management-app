@@ -6,6 +6,7 @@ module.exports.login = async (req, res) => {
 
     if (!userName || !password) {
         return res.status(400).json({
+            success: false,
             message: "userName and password are required"
         });
     }
@@ -18,19 +19,19 @@ module.exports.login = async (req, res) => {
 
         if (!rows.length) {
             return res.status(401).json({
+                success: false,
                 message: "Invalid credentials"
             });
         }
 
-        const loginStatus = await validateUser( req.body, rows[0]);
+        const loginStatus = await validateUser(req.body, rows[0]);
 
         if (loginStatus.statusCode === 401) {
             return res.status(401).json({
+                success: false,
                 message: "Invalid credentials"
             });
         }
-
-        console.log("Login successful, token generated:", loginStatus.token);
 
         res.cookie("token", loginStatus.token, {
             httpOnly: true,
@@ -40,11 +41,13 @@ module.exports.login = async (req, res) => {
         });
 
         return res.status(200).json({
+            success: true,
             message: "Login Successful"
         });
     } catch (error) {
         console.error(error);
         return res.status(500).json({
+            success: false,
             message: "Server Error"
         });
     }

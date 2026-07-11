@@ -1,1 +1,139 @@
-THIS IS LEAD MANAGEMENT APP REPO
+# Lead Management App
+
+A simple lead management application split into separate `frontend` and `backend` folders.
+
+## Requirements
+
+- Node.js 18+ (or compatible)
+- npm
+- MySQL server
+
+## Backend Setup
+
+1. Open a terminal and go to the backend folder:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in `backend/` with database and JWT settings.
+   ```env
+   PORT=5000
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=Root@1234
+   DB_NAME=lead_management
+   JWT_SECRET=your_jwt_secret
+   ```
+
+4. Ensure the MySQL database exists and is accessible using the credentials above.
+   ```sql
+   CREATE DATABASE IF NOT EXISTS lead_management;
+   ```
+
+5. Start the backend server:
+   ```bash
+   npm run dev
+   ```
+
+6. The backend should start on:
+   ```
+   http://localhost:5000
+   ```
+
+### Backend Notes
+
+- The API auth endpoint is mounted at `/api`.
+- Login is available at `http://localhost:5000/api/login`.
+- Lead routes are mounted at `/api/leads`.
+
+## Frontend Setup
+
+1. Open a terminal and go to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the frontend development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Vite will provide the local URL, commonly:
+   ```
+   http://localhost:5173
+   ```
+
+## Workflow
+
+- Start the backend first so the API is available.
+- Then start the frontend and use the UI to call the backend.
+
+## Database Schema
+
+### `users` table
+
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  userName VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### `leads` table
+
+```sql
+CREATE TABLE leads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  company VARCHAR(255),
+  email VARCHAR(255),
+  phone VARCHAR(50),
+  source VARCHAR(100),
+  status VARCHAR(100),
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Example schema setup
+
+```sql
+CREATE DATABASE IF NOT EXISTS lead_management;
+USE lead_management;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  userName VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE leads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  company VARCHAR(255),
+  email VARCHAR(255),
+  phone VARCHAR(50),
+  source VARCHAR(100),
+  status VARCHAR(100),
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+## Troubleshooting
+
+- If the backend fails to start, confirm MySQL is running and the `.env` values are correct.
+- If CORS or credentials issues occur, use the frontend origin in the backend CORS config and avoid `origin: "*"` with `credentials: true`.
