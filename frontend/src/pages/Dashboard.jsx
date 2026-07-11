@@ -6,11 +6,6 @@ import { useState, useEffect } from 'react';
 import { getLeads } from '../../routes/index.js';
 import { useToast } from '../components/ToastContext.jsx';
 
-// Card definitions: label shown to users, the underlying status value
-// (unchanged from the original data model), a color, and an icon.
-// Renamed to plain, business-friendly language per the brief while
-// keeping the same 5 status values (New / Contacted / Qualified / Won / Lost)
-// so no backend or filtering logic changes.
 const STAT_DEFS = [
   {
     key: 'total',
