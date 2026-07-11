@@ -78,6 +78,61 @@ A simple lead management application split into separate `frontend` and `backend
 - Start the backend first so the API is available.
 - Then start the frontend and use the UI to call the backend.
 
+## Database Schema
+
+### `users` table
+
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  userName VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### `leads` table
+
+```sql
+CREATE TABLE leads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  company VARCHAR(255),
+  email VARCHAR(255),
+  phone VARCHAR(50),
+  source VARCHAR(100),
+  status VARCHAR(100),
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Example schema setup
+
+```sql
+CREATE DATABASE IF NOT EXISTS lead_management;
+USE lead_management;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  userName VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE leads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  company VARCHAR(255),
+  email VARCHAR(255),
+  phone VARCHAR(50),
+  source VARCHAR(100),
+  status VARCHAR(100),
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
 ## Troubleshooting
 
 - If the backend fails to start, confirm MySQL is running and the `.env` values are correct.
