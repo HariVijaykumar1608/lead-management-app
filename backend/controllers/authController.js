@@ -40,6 +40,8 @@ module.exports.login = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000  // 1 day
         });
 
+        // console.log("Login Successful", loginStatus.token);  unComment this line to see the token in the console for debugging/testing purposes
+
         return res.status(200).json({
             success: true,
             message: "Login Successful"
