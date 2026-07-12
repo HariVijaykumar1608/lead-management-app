@@ -126,6 +126,20 @@ CREATE TABLE leads (
 );
 ```
 
+## API Documentation
+
+A Postman collection covering all API endpoints (login, get leads, create lead, update lead, delete lead) is included in this repository:
+
+```
+docs/Lead-Managemet-App.postman_collection.json
+```
+
+**To use it:**
+1. Open Postman
+2. Click **Import** (top left)
+3. Select the file above
+4. All requests will load with example request bodies, ready to test against `http://localhost:5000`
+
 ## Troubleshooting
 
 - If the backend fails to start, confirm MySQL is running and the `.env` values are correct.
