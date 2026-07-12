@@ -21,14 +21,7 @@ A simple lead management application split into separate `frontend` and `backend
    ```
 
 3. Create a `.env` file in `backend/` with database and JWT settings.
-   ```env
-   PORT=5000
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=Root@1234
-   DB_NAME=lead_management
-   JWT_SECRET=your_jwt_secret
-   ```
+   Refer `.env.example` file
 
 4. Ensure the MySQL database exists and is accessible using the credentials above.
    ```sql
